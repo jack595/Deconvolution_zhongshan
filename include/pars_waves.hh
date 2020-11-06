@@ -2,15 +2,18 @@
 #include "TString.h"
 struct pars_waves
 {
+
     const static int n_bin_getBaseline=45;
-    const static int loc_Bin_align=50;
+    const static int loc_Bin_align=275;
     // const static int nDimension=512;
     static int nDimension;
     static TString name_file;
+    static TString name_file_pde;
     static TString option_str;
     // const static int nDimension=4096;
     const static int waves_amplitude=512;
     const static int threshold=30;
+    const static bool UsePDEDataToGatExtraSPE=true;
 
     //divide.C Setting
     const static bool useThreshold50 = true;
@@ -33,10 +36,10 @@ struct pars_waves
     TString name_AverageOption;
     TString name_WhichFilter;
     TString name_FilterOption;
-    TString name_RootFilePath;
-    TString name_WorkDir;
-    TString name_PdfDir;
-    TString name_RawDataDir;
+    static TString name_RootFilePath;
+    static TString name_WorkDir;
+    static TString name_PdfDir;
+    static TString name_RawDataDir;
      
 
 };
