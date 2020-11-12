@@ -146,7 +146,7 @@ vector<double> getCutRange_and_isSPE_BigPeak( TString nameFile){
 
         int n_Peak=GetWaveValleyNum(waveform, parsWaves.n_bin_getBaseline, baseline );
         v_PeakNum.push_back(n_Peak);
-        if (n_Peak==2 && n_2Peak_toPdf<80 )
+        if (n_Peak==2 && n_2Peak_toPdf<20 )
         {
             TString name_2Peak="waveform_2Peak";
             v_2Peak_toPdf.push_back((TH1D*)waveform->Clone(name_2Peak+i));

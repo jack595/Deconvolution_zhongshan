@@ -63,7 +63,7 @@ void ReadData_zhongshan_vectorVersion( TString inputFilePath )
     int n_SmallPeakNoise=0;
 
     TString outputFilePath = parsWaves.name_RootFilePath;
-    outputFilePath+=parsWaves.name_file+"_RawData.root";
+    outputFilePath+= parsWaves.name_file_spe + "_RawData.root";
     TFile * outputAnalysedFile = new TFile(outputFilePath,"RECREATE");
     TTree * tree_rawWaveform = new TTree( "waves", "raw_data");
 //    gROOT->ProcessLine("#include <vector>");
@@ -281,9 +281,9 @@ void ReadData_zhongshan_vectorVersion( TString inputFilePath )
     tree_rawWaveform->Write();
     if (debug_plot_to_pdf)
     {
-        plot_into_pdf(v_rawWave_to_pdf, parsWaves.name_PdfDir+name_currentScript_outputPDF_Dir+"/"+parsWaves.name_file+"_raw_wave.pdf");
-        plot_into_pdf(v2D_BigPeak_to_pdf,"SignalBigPeak", parsWaves.nDimension, parsWaves.name_PdfDir+name_currentScript_outputPDF_Dir+"/"+parsWaves.name_file+"BigPeakSignal.pdf");
-        plot_into_pdf(v2D_Noise_to_pdf,"Noise_BigPeak",parsWaves.nDimension, parsWaves.name_PdfDir+name_currentScript_outputPDF_Dir+"/"+parsWaves.name_file+"BigPeakNoise.pdf");
+        plot_into_pdf(v_rawWave_to_pdf, parsWaves.name_PdfDir + name_currentScript_outputPDF_Dir + "/" + parsWaves.name_file_spe + "_raw_wave.pdf");
+        plot_into_pdf(v2D_BigPeak_to_pdf,"SignalBigPeak", parsWaves.nDimension, parsWaves.name_PdfDir + name_currentScript_outputPDF_Dir + "/" + parsWaves.name_file_spe + "BigPeakSignal.pdf");
+        plot_into_pdf(v2D_Noise_to_pdf,"Noise_BigPeak",parsWaves.nDimension, parsWaves.name_PdfDir + name_currentScript_outputPDF_Dir + "/" + parsWaves.name_file_spe + "BigPeakNoise.pdf");
     }
 
     if (debug_draw2D== true)

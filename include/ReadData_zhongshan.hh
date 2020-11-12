@@ -42,7 +42,7 @@ void draw_TH2D( TH2D* th2D, TString name_save)
 }
 
 
-void ReadData_zhongshan( TString inputFilePath ) {
+void ReadData_zhongshan( TString name_file ) {
     pars_waves parsWaves;
     TString name_currentScript_outputPDF_Dir = "raw_wave";
     system("mkdir -p " + parsWaves.name_PdfDir + "/" + name_currentScript_outputPDF_Dir);
@@ -54,7 +54,10 @@ void ReadData_zhongshan( TString inputFilePath ) {
 //            string("_") +string(date)+string("_")+ to_string(frame_length) + string("_")+string(daq);
     int global_range_id = 0;
     ifstream inputFile;
-    inputFile.open(inputFilePath, ios::in);
+    TString str_RunNum = name_file(name_file.Last('_')+1, 6);
+    TString name_file_FullPath = parsWaves.name_RawDataDir+str_RunNum+"/"+name_file;
+    cout<< name_file_FullPath <<endl;
+    inputFile.open( name_file_FullPath, ios::in);
 
     unsigned short oneSamplePoint;  // 10-bit sampling value takes 2 Bytes to store.
     int lengthOfEachWave = parsWaves.nDimension;
@@ -83,7 +86,7 @@ void ReadData_zhongshan( TString inputFilePath ) {
 
 
     TString outputFilePath = parsWaves.name_RootFilePath;
-    outputFilePath+=parsWaves.name_file+"_RawData.root";
+    outputFilePath+=name_file+"_RawData.root";
     TFile * outputAnalysedFile = new TFile(outputFilePath,"RECREATE");
     TTree * tree_rawWaveform = new TTree( "waves", "raw_data");
     TTree* tree_signalBigPeak = new TTree("SignalBigPeak", "SignalBigPeak");
@@ -110,12 +113,14 @@ void ReadData_zhongshan( TString inputFilePath ) {
     TH2D* h2D_BigPeakNoise_sub_baseline= new TH2D("h2D_BigPeakNoise_sub_baseline", "h2D_BigPeakNoise_sub_baseline", lengthOfEachWave, 0, lengthOfEachWave, 1000, -800, 200 );
     TH2D* h2D_SmallPeakNoise_sub_baseline= new TH2D("h2D_SmallPeakNoise_sub_baseline", "h2D_SmallPeakNoise_sub_baseline", lengthOfEachWave, 0, lengthOfEachWave, 1000, -800, 200 );
 
+
+
     bool whether_Signal_BigPeak= false;
     bool whether_Signal_SmallPeak= false;
 
 
     while (!inputFile.eof())
-//    for (int jj = 0; jj < 1000; jj++)
+//    for (int jj = 0; jj < 9000; jj++)
     {
         fcount++;
 
@@ -137,7 +142,6 @@ void ReadData_zhongshan( TString inputFilePath ) {
         }
         /**********the data of frame*************/
         for (int ii = 0; ii < lengthOfEachWave; ii++)
-//        for (int ii = 0; ii < lengthOfEachWave; ii++)
         {
             inputFile.read(reinterpret_cast<char *>(&oneSamplePoint),
                            2);     // Using reinterpret_cast to convert binary data.
@@ -229,7 +233,6 @@ void ReadData_zhongshan( TString inputFilePath ) {
                 if (debug_plot_to_pdf == true && n_BigPeakNoise < 100 )v2D_Noise_to_pdf.push_back(waceframe_BigPeakNoise);
             }
         }
-//        cout<<"checking!!!!!!!!!"<<endl;
         if (fcount%10000==0)cout<<fcount<<endl;
         tree_rawWaveform->Fill();
 //        waveframe->Delete();
@@ -258,9 +261,9 @@ void ReadData_zhongshan( TString inputFilePath ) {
     tree_noise->Write();
     if (debug_plot_to_pdf)
     {
-        plot_into_pdf(v_rawWave_to_pdf, parsWaves.name_PdfDir+name_currentScript_outputPDF_Dir+"/"+parsWaves.name_file+"_raw_wave.pdf");
-        plot_into_pdf(v2D_BigPeak_to_pdf, parsWaves.name_PdfDir+name_currentScript_outputPDF_Dir+"/"+parsWaves.name_file+"BigPeakSignal.pdf");
-        plot_into_pdf(v2D_Noise_to_pdf,  parsWaves.name_PdfDir+name_currentScript_outputPDF_Dir+"/"+parsWaves.name_file+"BigPeakNoise.pdf");
+        plot_into_pdf(v_rawWave_to_pdf, parsWaves.name_PdfDir+name_currentScript_outputPDF_Dir+"/"+name_file+"_raw_wave.pdf");
+        plot_into_pdf(v2D_BigPeak_to_pdf, parsWaves.name_PdfDir+name_currentScript_outputPDF_Dir+"/"+name_file+"BigPeakSignal.pdf");
+        plot_into_pdf(v2D_Noise_to_pdf,  parsWaves.name_PdfDir+name_currentScript_outputPDF_Dir+"/"+name_file+"BigPeakNoise.pdf");
     }
 
     if (debug_draw2D== true)
@@ -269,8 +272,13 @@ void ReadData_zhongshan( TString inputFilePath ) {
         h2D_raw_sub_baseline->Write();
     }
 
-
     outputAnalysedFile->Close();
+//    h2D_BigPeakNoise_sub_baseline->Delete();
+//    h2D_SmallPeak_sub_baseline->Delete();
+//    h2D_SmallPeakNoise_sub_baseline->Delete();
+//    h2D_raw_sub_baseline->Delete();
+//    h2D_raw->Delete();
+//    h2D_BigPeak_sub_baseline->Delete();
 }
 
 

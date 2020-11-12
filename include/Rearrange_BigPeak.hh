@@ -31,7 +31,7 @@ void Rearrange_BigPeakAndSmallPeak( TString nameFile ){
     double n_bin_getBaseline=parsWaves.n_bin_getBaseline;
     double loc_Bin_align=parsWaves.loc_Bin_align;
     // bool debug=false;
-//    TString nameFile=parsWaves.name_file;
+//    TString nameFile=parsWaves.name_file_spe;
 
     ////////////////////读取相应的文件////////////////////////////
     TString name_file_RawData=nameFile+"_RawData.root";
