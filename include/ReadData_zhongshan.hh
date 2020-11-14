@@ -47,7 +47,7 @@ void ReadData_zhongshan( TString name_file ) {
     TString name_currentScript_outputPDF_Dir = "raw_wave";
     system("mkdir -p " + parsWaves.name_PdfDir + "/" + name_currentScript_outputPDF_Dir);
     bool debug_plot_to_pdf = true;
-    bool debug_draw2D = true;
+    bool debug_draw2D = false;
     using namespace std;
 //    string inputFilePath = string("/pmtfs/disk02/container_data/container4/test/FADC_Run/") + string(daq) + string("/") +
 //            string(gcuid)+string("_")+string(gcusubid) +
@@ -63,12 +63,7 @@ void ReadData_zhongshan( TString name_file ) {
     int lengthOfEachWave = parsWaves.nDimension;
     int fcount = 0; //frame count
 
-//    TH1D* waveframe = NULL;
-//    TH1D* waveframe_substract_baseline=NULL ;
-//    TH1D* waveframe_BigPeakSignal =NULL;
-//    TH1D* waceframe_BigPeakNoise  =NULL;
-//    TH1D* waveframe_SmallPeakSignal=NULL;
-//    TH1D* waveframe_SmallPeakNoise=NULL;
+
 
         TH1D* waveframe = new TH1D(Form("raw_wave%i",fcount),"raw_waves",lengthOfEachWave,0,lengthOfEachWave);
         TH1D* waveframe_substract_baseline= new TH1D(Form("raw_wave_sub_baseline%i",fcount),"raw_waves_sub_baseline",lengthOfEachWave,0,lengthOfEachWave);
@@ -123,13 +118,6 @@ void ReadData_zhongshan( TString name_file ) {
 //    for (int jj = 0; jj < 9000; jj++)
     {
         fcount++;
-
-//        waveframe = new TH1D(Form("raw_wave%i",fcount),"raw_waves",lengthOfEachWave,0,lengthOfEachWave);
-//        waveframe_substract_baseline= new TH1D(Form("raw_wave_sub_baseline%i",fcount),"raw_waves_sub_baseline",lengthOfEachWave,0,lengthOfEachWave);
-//        waveframe_BigPeakSignal= new TH1D(Form("BigPeakSignal%i",fcount),"BigPeakSignal",lengthOfEachWave,0,lengthOfEachWave);
-//        waceframe_BigPeakNoise= new TH1D(Form("BigPeakNoise%i",fcount),"BigPeakNoise",lengthOfEachWave,0,lengthOfEachWave);
-//        waveframe_SmallPeakSignal= new TH1D(Form("SmallPeakSignal%i",fcount),"SmallPeakSignal",lengthOfEachWave,0,lengthOfEachWave);
-//        waveframe_SmallPeakNoise= new TH1D(Form("SmallPeakNoise%i",fcount),"SmallPeakNoise",lengthOfEachWave,0,lengthOfEachWave);
 
 
         /**********the header of frame*************/

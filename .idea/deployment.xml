@@ -2,10 +2,18 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="Always" serverName="luoxj (e93840e3-4b50-4090-84e0-6fc9e2fcdb0d)" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="luoxj (e93840e3-4b50-4090-84e0-6fc9e2fcdb0d)">
+      <paths name="Remote Host (461bdf4d-f8de-49f5-ab06-e9e457dafc00)">
         <serverdata>
           <mappings>
             <mapping deploy="/afs/ihep.ac.cn/users/l/luoxj/Deconvolution_zhongshan" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="luoxj (e93840e3-4b50-4090-84e0-6fc9e2fcdb0d)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="Deconvolution_zhongshan" local="$PROJECT_DIR$" web="/" />
+            <mapping local="" />
           </mappings>
         </serverdata>
       </paths>
